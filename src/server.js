@@ -45,8 +45,14 @@ app.use((req, res) => {
 
 // Middleware для обробки помилок
 app.use((err, req, res, next) => {
+  console.error(err);
+
+  const isProd = process.env.NODE_ENV === 'production';
+
   res.status(500).json({
-    message: err.message,
+    message: isProd
+      ? 'Something went wrong. Please try again later.'
+      : err.message,
   });
 });
 
