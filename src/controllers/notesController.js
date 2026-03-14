@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Note } from '../models/note.js';
 import createHttpError from 'http-errors';
 
-export const getNotes = async (req, res) => {
+export const getAllNotes = async (req, res) => {
   const notes = await Note.find();
   res.status(200).json(notes);
 };
@@ -11,12 +11,12 @@ export const getNoteById = async (req, res) => {
   const { noteId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid student ID format');
+    throw createHttpError(404, 'Invalid note ID format');
   }
   const note = await Note.findById(noteId);
 
   if (!note) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Note not found');
   }
 
   res.status(200).json(note);
@@ -31,7 +31,7 @@ export const deleteNote = async (req, res) => {
   const { noteId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid student ID format');
+    throw createHttpError(404, 'Invalid note ID format');
   }
 
   const note = await Note.findOneAndDelete({
@@ -39,7 +39,7 @@ export const deleteNote = async (req, res) => {
   });
 
   if (!note) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Note not found');
   }
 
   res.status(200).json(note);
@@ -49,7 +49,7 @@ export const updateNote = async (req, res) => {
   const { noteId } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid student ID format');
+    throw createHttpError(404, 'Invalid note ID format');
   }
 
   const note = await Note.findOneAndUpdate({ _id: noteId }, req.body, {
@@ -57,7 +57,7 @@ export const updateNote = async (req, res) => {
   });
 
   if (!note) {
-    throw createHttpError(404, 'Student not found');
+    throw createHttpError(404, 'Note not found');
   }
 
   res.status(200).json(note);
