@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "push": "git add . && git commit -m 'update' && git push origin 02-mongodb"
   },
   "repository": {
     "type": "git",
