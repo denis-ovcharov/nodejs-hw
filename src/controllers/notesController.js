@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import { Note } from '../models/note.js';
 import createHttpError from 'http-errors';
 
@@ -10,9 +9,6 @@ export const getAllNotes = async (req, res) => {
 export const getNoteById = async (req, res) => {
   const { noteId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid note ID format');
-  }
   const note = await Note.findById(noteId);
 
   if (!note) {
@@ -30,10 +26,6 @@ export const createNote = async (req, res) => {
 export const deleteNote = async (req, res) => {
   const { noteId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid note ID format');
-  }
-
   const note = await Note.findOneAndDelete({
     _id: noteId,
   });
@@ -47,10 +39,6 @@ export const deleteNote = async (req, res) => {
 
 export const updateNote = async (req, res) => {
   const { noteId } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(noteId)) {
-    throw createHttpError(404, 'Invalid note ID format');
-  }
 
   const note = await Note.findOneAndUpdate({ _id: noteId }, req.body, {
     new: true,
