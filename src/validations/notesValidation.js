@@ -30,7 +30,7 @@ export const createNoteSchema = {
       'string.max': 'Title should have at most {#limit} characters',
       'any.required': 'Title is required',
     }),
-    content: Joi.string().valid(''),
+    content: Joi.string().allow(''),
     tag: Joi.string().valid(...TAGS),
   }),
 };
@@ -41,7 +41,7 @@ export const updateNoteSchema = {
   }),
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(1),
-    content: Joi.string().valid(''),
+    content: Joi.string().allow(''),
     tag: Joi.string().valid(...TAGS),
   }).min(1),
 };
