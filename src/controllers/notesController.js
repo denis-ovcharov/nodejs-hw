@@ -16,14 +16,14 @@ export const getAllNotes = async (req, res) => {
     notesQuery.where('tag').equals(tag);
   }
 
-  const [totalItems, notes] = await Promise.all([
+  const [totalNotes, notes] = await Promise.all([
     notesQuery.clone().countDocuments(),
     notesQuery.skip(skip).limit(perPage),
   ]);
 
-  const totalPages = Math.ceil(totalItems / perPage);
+  const totalPages = Math.ceil(totalNotes / perPage);
 
-  res.status(200).json({ page, perPage, totalItems, totalPages, notes });
+  res.status(200).json({ page, perPage, totalNotes, totalPages, notes });
 };
 
 export const getNoteById = async (req, res) => {
@@ -61,7 +61,7 @@ export const updateNote = async (req, res) => {
   const { noteId } = req.params;
 
   const note = await Note.findOneAndUpdate({ _id: noteId }, req.body, {
-    new: true,
+    returnDocument: 'after',
   });
 
   if (!note) {
