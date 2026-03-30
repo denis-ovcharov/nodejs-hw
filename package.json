@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "push": "git add . && git commit -m 'update' && git push origin 03-validation"
+    "push": "git add . && git commit -m 'update' && git push"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,9 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "celebrate": "^15.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",

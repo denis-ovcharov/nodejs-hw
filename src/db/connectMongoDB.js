@@ -10,7 +10,7 @@ export const connectMongoDB = async () => {
     // Гарантуємо, що індекси в БД відповідають схемі
     await Note.syncIndexes();
 
-    console.log('Indexes synced successfully');
+    console.log('✅ Indexes synced successfully');
   } catch (error) {
     console.error('❌ Failed to connect to MongoDB:', error.message);
     process.exit(1);
