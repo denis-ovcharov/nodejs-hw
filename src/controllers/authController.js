@@ -1,7 +1,11 @@
 import createHttpError from 'http-errors';
 import { User } from '../models/user.js';
 import bcrypt from 'bcrypt';
-import { createSession, setSessionCookies } from '../services/auth.js';
+import {
+  clearSessionCookies,
+  createSession,
+  setSessionCookies,
+} from '../services/auth.js';
 import { Session } from '../models/session.js';
 
 export const registerUser = async (req, res) => {
@@ -65,9 +69,7 @@ export const logoutUser = async (req, res) => {
     await Session.deleteOne({ _id: sessionId });
   }
 
-  res.clearCookie('sessionId');
-  res.clearCookie('accessToken');
-  res.clearCookie('refreshToken');
+  clearSessionCookies(res);
 
   res.status(204).send();
 };

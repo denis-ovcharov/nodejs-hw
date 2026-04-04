@@ -14,4 +14,6 @@ const sessionSchema = new Schema(
   },
 );
 
+sessionSchema.index({ refreshTokenValidUntil: 1 }, { expireAfterSeconds: 0 });
+
 export const Session = model('Session', sessionSchema);
