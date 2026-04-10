@@ -124,6 +124,7 @@ export const requestResetEmail = async (req, res) => {
   // відповідь без відправлення листа (anti user enumeration).
   if (!user) {
     res.status(200).json({ message: 'Password reset email sent successfully' });
+    return;
   }
 
   // Користувач є — генеруємо короткоживучий JWT і відправляємо лист
