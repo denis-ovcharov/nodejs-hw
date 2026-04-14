@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import 'dotenv/config';
 import { logger } from './middleware/logger.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
@@ -10,13 +9,14 @@ import { errors } from 'celebrate';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import { corsMiddleware } from './middleware/corsMiddleware.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 
+app.use(corsMiddleware);
 app.use(logger);
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser());
 
 app.use(authRoutes);
