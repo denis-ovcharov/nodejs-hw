@@ -17,6 +17,10 @@ import { authenticate } from '../middleware/authenticate.js';
 
 const router = Router();
 
+router.get('/health', (req, res) => {
+  res.status(200).json({ status: 'server is ok' });
+});
+
 router.use('/notes', authenticate);
 
 router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
