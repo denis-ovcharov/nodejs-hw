@@ -20,10 +20,23 @@ const noteSchema = new Schema(
       default: 'Todo',
       enum: [...TAGS],
     },
+
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
+    },
+    isTrashed: {
+      type: Boolean,
+      default: false,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
+    },
+    isFavourite: {
+      type: Boolean,
+      default: false,
     },
   },
   {
