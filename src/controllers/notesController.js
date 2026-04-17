@@ -2,11 +2,17 @@ import { Note } from '../models/note.js';
 import createHttpError from 'http-errors';
 
 export const getAllNotes = async (req, res) => {
-  const { page = 1, perPage = 10, tag, search } = req.query;
+  const { page = 1, perPage = 10, tag, search, isFavourite } = req.query;
 
   const skip = (page - 1) * perPage;
 
   const notesQuery = Note.find({ userId: req.user._id, isTrashed: false });
+
+  const filter = { userId: req.user._id, isTrashed: false };
+
+  if (isFavourite === 'true') {
+    filter.isFavourite = true;
+  }
 
   if (search) {
     notesQuery.where({ $text: { $search: search } });
