@@ -7,7 +7,7 @@ export const getAllNotes = async (req, res) => {
   const skip = (page - 1) * perPage;
   const filter = { userId: req.user._id, isTrashed: false };
 
-  if (isFavourite === 'true') {
+  if (isFavourite === true) {
     filter.isFavourite = true;
   }
 
